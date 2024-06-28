@@ -2,6 +2,7 @@ import * as fs from 'node:fs/promises';
 import * as readline from 'node:readline/promises';
 import { stdin, stdout } from 'node:process';
 import { GoogleGenerativeAI } from "@google/generative-ai";
+
 (async () => {
     const key = await fs.readFile("api.key");
     const data = await fs.readFile("data.txt");
@@ -12,4 +13,5 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
     const result = await model.generateContent([prompt, data.toString().trim()]);
     const text = result.response.text().trim();
     console.log(text);
+    rl.close();
 })();
