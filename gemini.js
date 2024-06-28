@@ -3,7 +3,7 @@ import * as readline from 'node:readline/promises';
 import { stdin, stdout } from 'node:process';
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
-(async () => {
+let generate = async () => {
     const key = await fs.readFile("api.key");
     const data = await fs.readFile("data.txt");
     const rl = readline.createInterface({ input: stdin, output: stdout });
@@ -12,6 +12,15 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
     const prompt = await rl.question("prompt> ");
     const result = await model.generateContent([prompt, data.toString().trim()]);
     const text = result.response.text().trim();
-    console.log(text);
     rl.close();
+    return text;
+};
+
+(async () => {
+    try {
+        var answer = await generate();
+        console.log(answer);
+    } catch (error) {
+        console.error(error);
+    }
 })();
