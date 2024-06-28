@@ -10,6 +10,6 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
     const model = ai.getGenerativeModel({ model: "gemini-1.5-flash" });
     const prompt = await rl.question("prompt> ");
     const result = await model.generateContent([prompt, data.toString()]);
-    const output = result.response.text().trim();
-    console.log(output);
+    const text = result.response.text().trim();
+    console.log(text);
 })();
